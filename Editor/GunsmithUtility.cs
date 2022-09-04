@@ -95,7 +95,7 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
 
         public void OnEnable()
         {
-            HeaderTexture = (Texture2D)AssetDatabase.LoadAssetAtPath("Assets/LPD/Gunsmith/Resources/TITLEBAR.png", typeof(Texture2D));
+            HeaderTexture = (Texture2D)AssetDatabase.LoadAssetAtPath("Packages/com.lolipolicedepartment.gunsmith/Editor/TITLEBAR.png", typeof(Texture2D));
         }
 
         private void OnGUI()
