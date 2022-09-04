@@ -22,7 +22,7 @@ using VRC.SDK3.Avatars.Components;
 using VRC.SDK3.Avatars.ScriptableObjects;
 using System.Linq;
 
-namespace LoliPoliceDepartment.Utilities
+namespace LoliPoliceDepartment.Utilities.Gunsmith
 {
     public class GunsmithUtility : EditorWindow
     {
