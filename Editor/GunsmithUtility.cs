@@ -116,7 +116,7 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Enter layer name");
+                GUILayout.Label(new GUIContent("Enter layer name", "If a layer with this name already exists it will be added to, otherwise a new layer will be created"));
                 LayerName = GUILayout.TextField(LayerName, GUILayout.Width(Screen.width/2));
                 GUILayout.EndHorizontal();
 
@@ -189,7 +189,7 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
                 GUILayout.Space(5f);
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Custom Animation Stacks", EditorStyles.boldLabel);
+                GUILayout.Label(new GUIContent("Custom Animation Stacks", "A set of animations that transition from one to the next in a straight line"), EditorStyles.boldLabel);
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
 
@@ -495,12 +495,13 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
             }*/
             EditorGUILayout.EndScrollView();
             GUILayout.EndArea();
-            GUILayout.BeginArea(new Rect(0, Screen.height - 43f, Screen.width, 25f));
+            GUILayout.BeginArea(new Rect(0, Screen.height - 43f, Screen.width, 25f));            
             using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
             {
-                GUILayout.FlexibleSpace();
-                GUILayout.Label("Thank you for your support <3", EditorStyles.boldLabel);
-                GUILayout.FlexibleSpace();
+                if (GUILayout.Button(new GUIContent("Discord"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://discord.gg/lpd");
+                if (GUILayout.Button(new GUIContent("Twitter"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://twitter.com/LPD_vrchat");
+                if (GUILayout.Button(new GUIContent("Youtube"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://www.youtube.com/c/LoliPoliceDepartment");
+                if (GUILayout.Button(new GUIContent("Patreon"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://www.patreon.com/Karet");
             }
             GUILayout.EndArea();
         }
