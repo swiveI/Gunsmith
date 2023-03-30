@@ -241,46 +241,46 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
 
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Core Animations", EditorStyles.boldLabel);
+                GUILayout.Label(new GUIContent("Core Animations", "These animations are required"), EditorStyles.boldLabel);
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(3f);
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Fire Animation");
+                GUILayout.Label(new GUIContent("Fire Animation", "Animation to play when firing. Applies to both semi and full auto."));
                 FireAnim = (AnimationClip)EditorGUILayout.ObjectField(FireAnim, typeof(AnimationClip), true, GUILayout.Width(Screen.width / 2));
                 GUILayout.EndHorizontal();
 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Full Reload Animation");
+                GUILayout.Label(new GUIContent("Full Reload Animation", "Animation to use when the magazine is empty."));
                 FullReloadAnim = (AnimationClip)EditorGUILayout.ObjectField(FullReloadAnim, typeof(AnimationClip), true, GUILayout.Width(Screen.width / 2));
                 GUILayout.EndHorizontal();
 
                 GUILayout.Space(5f);
                 GUILayout.BeginHorizontal();
                 GUILayout.FlexibleSpace();
-                GUILayout.Label("Optional Animations", EditorStyles.boldLabel);
+                GUILayout.Label(new GUIContent("Optional Animations", "These are not required but will add more features."), EditorStyles.boldLabel);
                 GUILayout.FlexibleSpace();
                 GUILayout.EndHorizontal();
                 GUILayout.Space(3f);
                 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Tactical Reload Animation");
+                GUILayout.Label(new GUIContent("Tactical Reload Animation", "This animation will play instead of the full reload animation when the user reloads before they run out of ammo."));
                 TacReloadAnim = (AnimationClip)EditorGUILayout.ObjectField(TacReloadAnim, typeof(AnimationClip), true, GUILayout.Width(Screen.width / 2));
                 GUILayout.EndHorizontal();
                 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Empty State Animation");
+                GUILayout.Label(new GUIContent("Empty State Animation", "Animation that plays when the firearm is empty. Useful for firearms where the slide locks back after the magazine is empty."));
                 EmptyStateAnim = (AnimationClip)EditorGUILayout.ObjectField(EmptyStateAnim, typeof(AnimationClip), true, GUILayout.Width(Screen.width / 2));
                 GUILayout.EndHorizontal();
                 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Empty Click Animation");
+                GUILayout.Label(new GUIContent("Empty Click Animation", "Animation to play when the user attempts to fire while the ammo count is zero. Typically a click sound in most games."));
                 EmptyClickAnim = (AnimationClip)EditorGUILayout.ObjectField(EmptyClickAnim, typeof(AnimationClip), true, GUILayout.Width(Screen.width / 2));
                 GUILayout.EndHorizontal();
                 
                 GUILayout.BeginHorizontal();
-                GUILayout.Label("Final Shot Animation");
+                GUILayout.Label(new GUIContent("Final Shot Animation", "Alternitive animation to play for the final shot of a magazine. Useful for firearms where the slide locks back after the magazine is empty."));
                 FinalShotAnim = (AnimationClip)EditorGUILayout.ObjectField(FinalShotAnim, typeof(AnimationClip), true, GUILayout.Width(Screen.width / 2));
                 GUILayout.EndHorizontal();
 
@@ -496,14 +496,19 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
             EditorGUILayout.EndScrollView();
             GUILayout.EndArea();
             GUILayout.BeginArea(new Rect(0, Screen.height - 43f, Screen.width, 25f));            
-            using (new GUILayout.HorizontalScope(EditorStyles.helpBox))
+            using (new GUILayout.HorizontalScope())
             {
-                if (GUILayout.Button(new GUIContent("Discord"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://discord.gg/lpd");
-                if (GUILayout.Button(new GUIContent("Twitter"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://twitter.com/LPD_vrchat");
-                if (GUILayout.Button(new GUIContent("Youtube"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://www.youtube.com/c/LoliPoliceDepartment");
-                if (GUILayout.Button(new GUIContent("Patreon"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://www.patreon.com/Karet");
+                GUI.color = Color.white;
+                GUI.backgroundColor = new Color(0.4509804f, 0.5411765f, 0.8588236f);
+                if (GUILayout.Button(new GUIContent("Discord"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 3), GUILayout.Height(43))) Application.OpenURL("https://discord.gg/lpd");
+                GUI.backgroundColor = new Color(0.1137255f, .6313726f, 0.9490196f);
+                if (GUILayout.Button(new GUIContent("Twitter"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 3), GUILayout.Height(43))) Application.OpenURL("https://twitter.com/LPD_vrchat");
+                GUI.backgroundColor = new Color(0.8039216f, 0.1254902f, 0.1215686f);
+                if (GUILayout.Button(new GUIContent("Youtube"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 3), GUILayout.Height(43))) Application.OpenURL("https://www.youtube.com/c/LoliPoliceDepartment");
+                //if (GUILayout.Button(new GUIContent("Patreon"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://www.patreon.com/Karet");
             }
             GUILayout.EndArea();
+            GUI.backgroundColor = Color.white;
         }
 
         private void ValidateLayer()
