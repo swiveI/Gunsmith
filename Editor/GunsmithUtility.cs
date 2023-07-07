@@ -28,7 +28,12 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
     {
         Vector2 scroll;
 
-        Texture2D HeaderTexture;
+        private Texture2D HeaderTexture;
+        private Texture2D twitterLogo;
+        private Texture2D discordLogo;
+        private Texture2D youtubeLogo;
+        private Texture2D kofiLogo;
+        
         VRCAvatarDescriptor Avatar;
         RuntimeAnimatorController FXAnimator;
         VRCExpressionParameters Expressions;
@@ -96,6 +101,10 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
         public void OnEnable()
         {
             HeaderTexture = (Texture2D)AssetDatabase.LoadAssetAtPath("Packages/com.lolipolicedepartment.gunsmith/Editor/TITLEBAR.png", typeof(Texture2D));
+            twitterLogo = (Texture2D)AssetDatabase.LoadAssetAtPath("Packages/com.lolipolicedepartment.gunsmith/Editor/SocialLogos/TwitterLogo.png", typeof(Texture2D));
+            discordLogo = (Texture2D)AssetDatabase.LoadAssetAtPath("Packages/com.lolipolicedepartment.gunsmith/Editor/SocialLogos/DiscordLogo.png", typeof(Texture2D));
+            youtubeLogo = (Texture2D)AssetDatabase.LoadAssetAtPath("Packages/com.lolipolicedepartment.gunsmith/Editor/SocialLogos/YoutubeLogo.png", typeof(Texture2D));
+            kofiLogo = (Texture2D)AssetDatabase.LoadAssetAtPath("Packages/com.lolipolicedepartment.gunsmith/Editor/SocialLogos/KofiLogo.png", typeof(Texture2D));
         }
 
         private void OnGUI()
@@ -195,8 +204,8 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
 
                 GUILayout.BeginHorizontal();
                 GUILayout.Label("Name");
-                newCustomAnimationSetName = GUILayout.TextField(newCustomAnimationSetName);
-                if (GUILayout.Button("Add Custom Animation Stack"))
+                newCustomAnimationSetName = GUILayout.TextField(newCustomAnimationSetName, GUILayout.MaxWidth(Screen.width/3), GUILayout.Width(Screen.width / 3));
+                if (GUILayout.Button("Add Custom Animation Stack", GUILayout.Width(Screen.width / 2)))
                 {
                     if (newCustomAnimationSetName != "")
                     {
@@ -223,8 +232,8 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
                 for (int i = 0; i < CustomAnimations.Count; i++)
                 {
                     GUILayout.BeginHorizontal();
-                    GUILayout.Label(CustomAnimations[i].Name);
-                    if (GUILayout.Button("Remove"))
+                    GUILayout.Label(CustomAnimations[i].Name, EditorStyles.wordWrappedLabel);
+                    if (GUILayout.Button("Remove", GUILayout.Width(Screen.width / 2)))
                     {
                         CustomAnimations.Remove(CustomAnimations[i]);
                     }
@@ -402,6 +411,8 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
                             CustomAnimations[i].Animations.RemoveAt(j);
                             continue;
                         }
+                        GUILayout.Space(3);
+                        
                         for (int k = 0; k < CustomAnimations[i].Animations[j].transitions.Count; k++)
                         {
                             GUILayout.BeginHorizontal();
@@ -471,18 +482,35 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
             }
 
             GUILayout.Space(5f);
-            if(GUILayout.Button("Generate Animation layer"))
+
+            if (CustomAnimations.Count > 0)
+            {
+                GUI.backgroundColor = new Color(1f, .1f, .8f, 1f);
+            
+                if(GUILayout.Button(new GUIContent("Generate Animation Stacks")))
+                {
+                    if (ValidateFields(false))
+                    {
+                        ValidateLayer();
+                        GenerateCustomAnimationSets();
+                    }
+                }
+                GUI.backgroundColor = Color.white;
+            }
+            
+            GUILayout.Space(5f);
+            
+            GUI.backgroundColor = new Color(0f, 0.5f, 0.5f, 1f);
+            
+            if(GUILayout.Button(new GUIContent("Generate Core Animation layer")))
             {
                 if (ValidateFields())
                 {
                     ValidateLayer();
                     GenerateCore();
-                    if (CustomAnimations.Count > 0)
-                    {
-                        GenerateCustomAnimationSets();
-                    }
                 }
             }
+            GUI.backgroundColor = Color.white;
             /*
             Controller = (AnimatorController)EditorGUILayout.ObjectField(Controller, typeof(AnimatorController));
             if (GUILayout.Button("Get Positions"))
@@ -499,13 +527,16 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
             using (new GUILayout.HorizontalScope())
             {
                 GUI.color = Color.white;
-                GUI.backgroundColor = new Color(0.4509804f, 0.5411765f, 0.8588236f);
-                if (GUILayout.Button(new GUIContent("Discord"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 3), GUILayout.Height(43))) Application.OpenURL("https://discord.gg/lpd");
-                GUI.backgroundColor = new Color(0.1137255f, .6313726f, 0.9490196f);
-                if (GUILayout.Button(new GUIContent("Twitter"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 3), GUILayout.Height(43))) Application.OpenURL("https://twitter.com/LPD_vrchat");
-                GUI.backgroundColor = new Color(0.8039216f, 0.1254902f, 0.1215686f);
-                if (GUILayout.Button(new GUIContent("Youtube"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 3), GUILayout.Height(43))) Application.OpenURL("https://www.youtube.com/c/LoliPoliceDepartment");
-                //if (GUILayout.Button(new GUIContent("Patreon"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(43))) Application.OpenURL("https://www.patreon.com/Karet");
+                GUI.backgroundColor = Color.white;
+                
+                GUI.backgroundColor = new Color(0.4509804f, 0.5411765f, 0.8588236f, 1f);
+                if (GUILayout.Button(new GUIContent(discordLogo, "Discord"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(60))) Application.OpenURL("https://discord.gg/lpd");
+                GUI.backgroundColor = new Color(0.1137255f, .6313726f, 0.9490196f, 1f);
+                if (GUILayout.Button(new GUIContent(twitterLogo, "Twitter"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(60))) Application.OpenURL("https://twitter.com/LPD_vrchat");
+                GUI.backgroundColor = new Color(0.8039216f, 0.1254902f, 0.1215686f, 1f);
+                if (GUILayout.Button(new GUIContent(youtubeLogo, "Youtube"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(60))) Application.OpenURL("https://www.youtube.com/c/LoliPoliceDepartment");
+                GUI.backgroundColor = new Color(1f, 0.3137255f, 0.3137255f, 1f);
+                if (GUILayout.Button(new GUIContent(kofiLogo, "Ko-fi"), EditorStyles.miniButtonMid, GUILayout.Width(Screen.width / 4), GUILayout.Height(60))) Application.OpenURL("https://ko-fi.com/lolipolicedepartment");
             }
             GUILayout.EndArea();
             GUI.backgroundColor = Color.white;
@@ -1258,7 +1289,7 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
             }
             return -1;
         }
-        private bool ValidateFields()
+        private bool ValidateFields(bool requireCore = true)
         {
             if (Avatar == null)
             {
@@ -1277,11 +1308,7 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
                 Debug.LogError("<color=#e0115fff><b>Gunsmith:</b></color> This Avatar Does not have a VRC Expressions Parameters Object");
                 return false;
             }
-            if (FireAnim == null || FullReloadAnim == null)
-            {
-                Debug.LogError("<color=#e0115fff><b>Gunsmith:</b></color> All Core animation fields are required");
-                return false;
-            }
+            
             Debug.Log("<color=#e0115fff><b>Gunsmith:</b></color> All Core Objects are in place.");
 
             if (LayerName == "")
@@ -1289,12 +1316,23 @@ namespace LoliPoliceDepartment.Utilities.Gunsmith
                 Debug.LogError("<color=#e0115fff><b>Gunsmith:</b></color> You must enter a name for the Animation Layer. If a layer matching that name doesnt exist, one will be created");
                 return false;
             }
-            if (Ammo == 0)
-            {
-                Debug.LogError("<color=#e0115fff><b>Gunsmith:</b></color> You mush enter a number greater than zero for the number of rounds you would like the weapon to have");
-                return false;
-            }
+            
 
+            if (requireCore)
+            {
+                if (Ammo == 0)
+                {
+                    Debug.LogError("<color=#e0115fff><b>Gunsmith:</b></color> You mush enter a number greater than zero for the number of rounds you would like the weapon to have");
+                    return false;
+                }
+                
+                if (FireAnim == null || FullReloadAnim == null)
+                {
+                    Debug.LogError("<color=#e0115fff><b>Gunsmith:</b></color> All Core animation fields are required");
+                    return false;
+                }
+            }
+            
             if (ChamberCheck)
             {
                 if (ChamberCheckPullAnim == null || ChamberCheckReleaseAnim == null)
