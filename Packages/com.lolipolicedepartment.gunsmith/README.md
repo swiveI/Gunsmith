@@ -9,3 +9,4 @@ This tool Takes in unity animation files and sets up an animation layer on your 
 This tool was designed to save time, not completely automate the process, so some unity animation knowlage is required.
 
 ![image](https://user-images.githubusercontent.com/429522/179315137-eed9768c-0bba-415b-a8ff-e034eb88cc0b.png)
+
