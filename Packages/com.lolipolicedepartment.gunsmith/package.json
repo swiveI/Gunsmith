@@ -12,7 +12,7 @@
   "author": {
     "name": "Loli Police Department",
     "url": "https://discord.gg/lpd"
-  }
+  },
   "vpmDependencies" : {
     "com.vrchat.base" : "^3.4",
     "com.vrchat.avatars" : "^3.4"
