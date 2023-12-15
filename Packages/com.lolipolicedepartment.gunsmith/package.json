@@ -5,7 +5,7 @@
   "description": "A tool for setting up firearm animator controllers on avatars in VRChat",
   "unity": "2019.4",
   "unityRelease": "31f1",
- "keywords": [
+  "keywords": [
     "VRChat",
     "LPD"
   ],
@@ -16,5 +16,5 @@
   "vpmDependencies" : {
     "com.vrchat.base" : "^3.4",
     "com.vrchat.avatars" : "^3.4"
-  },
+  }
 }
