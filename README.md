@@ -1,7 +1,7 @@
 # Gunsmith
 A tool for setting up firearm animator controllers on avatars in VRChat
 
-This tool was origionally built for the Loli Police Department roleplay group in VRChat. 
+This tool was originally built for the Loli Police Department roleplay group in VRChat. 
 No affiliation with any actual law enforcement agency.
 discord.gg/lpd
 
