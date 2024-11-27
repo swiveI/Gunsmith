@@ -1,5 +1,5 @@
 {
-  "name": "com.lolipolicedepartment.gunsmith",
+  "name": "com.localpolicedepartment.gunsmith",
   "version": "2.0.0",
   "displayName": "Gunsmith",
   "description": "A tool for setting up firearm animator controllers on avatars in VRChat",
